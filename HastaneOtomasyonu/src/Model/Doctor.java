@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Doctor extends User {
+public class Doctor extends User { // User Class'ýndan kalýtým yaptýk
 	Connection con = conn.connDb();
 	Statement st = null;
 	ResultSet rs = null;

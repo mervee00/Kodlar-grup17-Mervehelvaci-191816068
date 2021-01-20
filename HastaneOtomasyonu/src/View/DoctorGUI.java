@@ -44,6 +44,7 @@ public class DoctorGUI extends JFrame {
 	private static WorkHour whour = new WorkHour();
 	private static Patient patient = new Patient();
 	private static Appointment appoint = new Appointment();
+
 	private JPanel contentPane;
 	private JTable table_whour;
 	private DefaultTableModel whourModel;
@@ -56,6 +57,11 @@ public class DoctorGUI extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTable table_1;
 
 	/**
 	 * Launch the application.
@@ -405,58 +411,58 @@ public class DoctorGUI extends JFrame {
 		btn_search_1_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_search_1_1_1.setBounds(421, 8, 112, 30);
 		panel_fullAppoint.add(btn_search_1_1_1);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		w_whourPane.addTab("Bilgilerim", null, panel, null);
 		panel.setLayout(null);
-		
+
 		JLabel lbl_dName_3_1 = new JLabel("Bilgilerim:");
 		lbl_dName_3_1.setFont(new Font("Impact", Font.PLAIN, 17));
 		lbl_dName_3_1.setBounds(36, 11, 82, 21);
 		panel.add(lbl_dName_3_1);
-		
-		JLabel lblNewLabel = new JLabel("Ad Soyad: "+doctor.getName());
+
+		JLabel lblNewLabel = new JLabel("Ad Soyad: " + doctor.getName());
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel.setBackground(new Color(204, 204, 255));
 		lblNewLabel.setBounds(36, 34, 230, 35);
 		panel.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tc: "+doctor.getTcno());
+
+		JLabel lblNewLabel_1 = new JLabel("Tc: " + doctor.getTcno());
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_1.setBackground(new Color(204, 204, 255));
 		lblNewLabel_1.setBounds(36, 75, 254, 35);
 		panel.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("\u015Eifre: "+doctor.getPassword());
+
+		JLabel lblNewLabel_2 = new JLabel("\u015Eifre: " + doctor.getPassword());
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_2.setBackground(new Color(204, 204, 255));
 		lblNewLabel_2.setBounds(36, 115, 254, 35);
 		panel.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Telefon: "+doctor.getTelephone());
+
+		JLabel lblNewLabel_3 = new JLabel("Telefon: " + doctor.getTelephone());
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_3.setBackground(new Color(204, 204, 255));
 		lblNewLabel_3.setBounds(36, 154, 254, 35);
 		panel.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Adres: "+doctor.getAddress());
+
+		JLabel lblNewLabel_4 = new JLabel("Adres: " + doctor.getAddress());
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_4.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_4.setBackground(new Color(204, 204, 255));
 		lblNewLabel_4.setBounds(36, 190, 254, 35);
 		panel.add(lblNewLabel_4);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setToolTipText("");
 		panel_3.setBackground(new Color(255, 255, 153));
 		panel_3.setBounds(35, 34, 255, 206);
 		panel.add(panel_3);
-		
+
 		JButton btn_dUpdate_1 = new JButton(new ImageIcon(getClass().getResource("/arrangement.png")));
 		btn_dUpdate_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -465,107 +471,105 @@ public class DoctorGUI extends JFrame {
 				textField_2.setText(doctor.getPassword());
 				textField_3.setText(doctor.getTelephone());
 				textField_4.setText(doctor.getAddress());
-				
+
 			}
 		});
 		btn_dUpdate_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_dUpdate_1.setBackground(Color.LIGHT_GRAY);
 		btn_dUpdate_1.setBounds(300, 63, 58, 46);
 		panel.add(btn_dUpdate_1);
-		
+
 		JLabel lbl_dName_3_2 = new JLabel("D\u00FCzenle");
 		lbl_dName_3_2.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3_2.setBounds(300, 42, 58, 21);
 		panel.add(lbl_dName_3_2);
-		
+
 		JLabel lbl_dName_3 = new JLabel("Ad Soyad");
 		lbl_dName_3.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3.setBounds(386, 42, 82, 21);
 		panel.add(lbl_dName_3);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField.setColumns(10);
 		textField.setBounds(386, 63, 166, 30);
 		panel.add(textField);
-		
+
 		JLabel lbl_dTC_1 = new JLabel("TC No");
 		lbl_dTC_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dTC_1.setBounds(386, 98, 82, 21);
 		panel.add(lbl_dTC_1);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_1.setColumns(10);
 		textField_1.setBounds(386, 115, 166, 30);
 		panel.add(textField_1);
-		
+
 		JLabel lbl_dPass_1 = new JLabel("\u015Eifre");
 		lbl_dPass_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dPass_1.setBounds(386, 150, 82, 21);
 		panel.add(lbl_dPass_1);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_2.setColumns(10);
 		textField_2.setBounds(386, 168, 166, 30);
 		panel.add(textField_2);
-		
+
 		JLabel lbl_dName_1_1 = new JLabel("Telefon");
 		lbl_dName_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_1_1.setBounds(386, 201, 82, 21);
 		panel.add(lbl_dName_1_1);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_3.setColumns(10);
 		textField_3.setBounds(386, 222, 166, 30);
 		panel.add(textField_3);
-		
+
 		JLabel lbl_dName_2_1 = new JLabel("Adres");
 		lbl_dName_2_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_2_1.setBounds(386, 252, 82, 21);
 		panel.add(lbl_dName_2_1);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_4.setColumns(10);
 		textField_4.setBounds(386, 270, 166, 46);
 		panel.add(textField_4);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(204, 204, 255));
 		panel_1.setBounds(368, 39, 199, 290);
 		panel.add(panel_1);
-		
+
 		JButton btn_dDelete_1 = new JButton(new ImageIcon(getClass().getResource("/save.png")));
 		btn_dDelete_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().length() == 0 || textField_1.getText().length() == 0
 						|| textField_2.getText().length() == 0) {
 					Helper.showMsg("complete");
-				}
-				else if(textField_1.getText().length() !=11 ){
+				} else if (textField_1.getText().length() != 11) {
 					Helper.showMsg("TC kimlik numarasý 11 haneli olmalýdýr!");
-				}
-				else if(textField_2.getText().length() !=6) {
+				} else if (textField_2.getText().length() != 6) {
 					Helper.showMsg("Þifre 6 haneli olmalýdýr!");
-				}else {
+				} else {
 					try {
 						int selectID = doctor.getId();
-						boolean control = doctor.updateDoctor(selectID,textField_1.getText(), textField_2.getText(),
-								textField.getText(),textField_3.getText(),textField_4.getText());
+						boolean control = doctor.updateDoctor(selectID, textField_1.getText(), textField_2.getText(),
+								textField.getText(), textField_3.getText(), textField_4.getText());
 						if (control) {
 							Helper.showMsg("success");
 							textField.setText(null);
 							textField_1.setText(null);
 							textField_2.setText(null);
 							textField_3.setText(null);
-							textField_4.setText(null);	
+							textField_4.setText(null);
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}				
+					}
 				}
 			}
 		});
@@ -573,11 +577,76 @@ public class DoctorGUI extends JFrame {
 		btn_dDelete_1.setBackground(Color.LIGHT_GRAY);
 		btn_dDelete_1.setBounds(582, 283, 58, 46);
 		panel.add(btn_dDelete_1);
-		
+
 		JLabel lbl_dName_3_2_1 = new JLabel("Kaydet");
 		lbl_dName_3_2_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3_2_1.setBounds(582, 262, 70, 21);
 		panel.add(lbl_dName_3_2_1);
+
+		JPanel panel_2 = new JPanel();
+		w_whourPane.addTab("New tab", null, panel_2, null);
+		panel_2.setLayout(null);
+
+		JLabel lbl_dName_3_3 = new JLabel("Ad Soyad");
+		lbl_dName_3_3.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
+		lbl_dName_3_3.setBounds(42, 24, 82, 21);
+		panel_2.add(lbl_dName_3_3);
+
+		textField_5 = new JTextField();
+		textField_5.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		textField_5.setColumns(10);
+		textField_5.setBounds(42, 45, 166, 30);
+		panel_2.add(textField_5);
+
+		JLabel lbl_dTC_1_1 = new JLabel("TC No");
+		lbl_dTC_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
+		lbl_dTC_1_1.setBounds(42, 80, 82, 21);
+		panel_2.add(lbl_dTC_1_1);
+
+		textField_6 = new JTextField();
+		textField_6.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		textField_6.setColumns(10);
+		textField_6.setBounds(42, 97, 166, 30);
+		panel_2.add(textField_6);
+
+		JLabel lbl_dPass_1_1 = new JLabel("\u015Eifre");
+		lbl_dPass_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
+		lbl_dPass_1_1.setBounds(42, 132, 82, 21);
+		panel_2.add(lbl_dPass_1_1);
+
+		textField_7 = new JTextField();
+		textField_7.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		textField_7.setColumns(10);
+		textField_7.setBounds(42, 150, 166, 30);
+		panel_2.add(textField_7);
+
+		JLabel lbl_dName_1_1_1 = new JLabel("Telefon");
+		lbl_dName_1_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
+		lbl_dName_1_1_1.setBounds(42, 183, 82, 21);
+		panel_2.add(lbl_dName_1_1_1);
+
+		textField_8 = new JTextField();
+		textField_8.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		textField_8.setColumns(10);
+		textField_8.setBounds(42, 204, 166, 30);
+		panel_2.add(textField_8);
+
+		JPanel panel_1_1 = new JPanel();
+		panel_1_1.setBackground(new Color(204, 204, 255));
+		panel_1_1.setBounds(24, 21, 199, 290);
+		panel_2.add(panel_1_1);
+
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(233, 24, 466, 290);
+		panel_2.add(panel_4);
+		panel_4.setLayout(null);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 446, 268);
+		panel_4.add(scrollPane);
+
+		table_1 = new JTable();
+		scrollPane.setViewportView(table_1);
 
 		JButton btn_exit = new JButton(new ImageIcon(getClass().getResource("/cancel.png")));
 		btn_exit.setBackground(Color.WHITE);

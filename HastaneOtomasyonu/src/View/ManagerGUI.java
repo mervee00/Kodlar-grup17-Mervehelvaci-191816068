@@ -53,7 +53,8 @@ import javax.swing.JList;
 import javax.swing.JTextPane;
 
 public class ManagerGUI extends JFrame {
-	public static Manager bashekim = new Manager();
+	public static Manager bashekim = new Manager();// Polymorphism: farklý nesneler üreterek bunlarý manager class'ýnda
+													// farklý þekilde kullandým.
 	private static Doctor doctor = new Doctor();
 	public static Polyclinic polyclinic = new Polyclinic();
 	private static Appointment appoint = new Appointment();
@@ -118,7 +119,7 @@ public class ManagerGUI extends JFrame {
 		colDoctor[3] = "Þifre";
 		colDoctor[4] = "Telefon";
 		colDoctor[5] = "Adres";
-		
+
 		doctorModel.setColumnIdentifiers(colDoctor);
 		doctorData = new Object[6];
 		for (int i = 0; i < bashekim.getDoctorList().size(); i++) {
@@ -152,29 +153,24 @@ public class ManagerGUI extends JFrame {
 		employeeModel.setColumnIdentifiers(colEmployee);
 		Object[] employeeData = new Object[2];
 
-
 		// randevu model
-				appointModel = new DefaultTableModel();
-				Object[] colAppoint = new Object[4];
-				colAppoint[0] = "ID";
-				colAppoint[1] = "Doctor Adý";
-				colAppoint[2] = "Hasta Adý";
-				colAppoint[3] = "Tarih";
-				appointModel.setColumnIdentifiers(colAppoint);
-				appointData = new Object[4];
+		appointModel = new DefaultTableModel();
+		Object[] colAppoint = new Object[4];
+		colAppoint[0] = "ID";
+		colAppoint[1] = "Doctor Adý";
+		colAppoint[2] = "Hasta Adý";
+		colAppoint[3] = "Tarih";
+		appointModel.setColumnIdentifiers(colAppoint);
+		appointData = new Object[4];
 
-				for (int i = 0; i < appoint.getManagerAppointmentList().size(); i++) {
-					appointData[0] = appoint.getManagerAppointmentList().get(i).getId();
-					appointData[1] = appoint.getManagerAppointmentList().get(i).getDoctorName();
-					appointData[2] = appoint.getManagerAppointmentList().get(i).getPatientName();
-					appointData[3] = appoint.getManagerAppointmentList().get(i).getAppDate();
-					appointModel.addRow(appointData);
-				}
+		for (int i = 0; i < appoint.getManagerAppointmentList().size(); i++) {
+			appointData[0] = appoint.getManagerAppointmentList().get(i).getId();
+			appointData[1] = appoint.getManagerAppointmentList().get(i).getDoctorName();
+			appointData[2] = appoint.getManagerAppointmentList().get(i).getPatientName();
+			appointData[3] = appoint.getManagerAppointmentList().get(i).getAppDate();
+			appointModel.addRow(appointData);
+		}
 
-		
-		
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 550);
 		w_pane = new JPanel();
@@ -281,16 +277,14 @@ public class ManagerGUI extends JFrame {
 				if (fld_dTc.getText().length() == 0 || fld_dPass.getText().length() == 0
 						|| fld_dName.getText().length() == 0) {
 					Helper.showMsg("complete");
-				}
-				else if(fld_dTc.getText().length() !=11 ){
+				} else if (fld_dTc.getText().length() != 11) {
 					Helper.showMsg("TC kimlik numarasý 11 haneli olmalýdýr!");
-				}
-				else if(fld_dPass.getText().length() !=6) {
+				} else if (fld_dPass.getText().length() != 6) {
 					Helper.showMsg("Þifre 6 haneli olmalýdýr!");
-				}else {
+				} else {
 					try {
 						boolean control = bashekim.addDoctor(fld_dTc.getText(), fld_dPass.getText(),
-								fld_dName.getText(),fld_telephone.getText(),fld_address.getText());
+								fld_dName.getText(), fld_telephone.getText(), fld_address.getText());
 						if (control) {
 							Helper.showMsg("success");
 							fld_dName.setText(null);
@@ -304,7 +298,7 @@ public class ManagerGUI extends JFrame {
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}				
+					}
 				}
 			}
 		});
@@ -328,7 +322,7 @@ public class ManagerGUI extends JFrame {
 							if (control) {
 								Helper.showMsg("success");
 								updateDoctorModel();
-															}
+							}
 						} else {
 							Helper.showMsg("cancel");
 						}
@@ -350,47 +344,44 @@ public class ManagerGUI extends JFrame {
 		w_scrollDoctor.setBounds(10, 43, 519, 298);
 		w_doctor.add(w_scrollDoctor);
 
-		
 		table_doctor = new JTable(doctorModel);
 		table_doctor.setComponentPopupMenu(doctorMenu);
-		//Tabloda seçilen doktorun bilgilerini text_field'lere yazdýrýr.
+		// Tabloda seçilen doktorun bilgilerini text_field'lere yazdýrýr.
 		table_doctor.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				fld_dName.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(),1));
-				fld_dTc.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(),2));
-				fld_dPass.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(),3));
-				fld_telephone.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(),4));
-				fld_address.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(),5));
+				fld_dName.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(), 1));
+				fld_dTc.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(), 2));
+				fld_dPass.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(), 3));
+				fld_telephone.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(), 4));
+				fld_address.setText((String) doctorModel.getValueAt(table_doctor.getSelectedRow(), 5));
 			}
 		});
 		w_scrollDoctor.setViewportView(table_doctor);
-		
+
 		fld_dPass = new JTextField();
 		fld_dPass.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		fld_dPass.setColumns(10);
 		fld_dPass.setBounds(533, 135, 166, 30);
 		w_doctor.add(fld_dPass);
 
-		//Doktor bilgilerini günceller.
+		// Doktor bilgilerini günceller.
 		JButton btn_dUpdate = new JButton(new ImageIcon(getClass().getResource("/update.png")));
 		btn_dUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (fld_dTc.getText().length() == 0 || fld_dPass.getText().length() == 0
 						|| fld_dName.getText().length() == 0) {
 					Helper.showMsg("complete");
-				}
-				else if(fld_dTc.getText().length() !=11 ){
+				} else if (fld_dTc.getText().length() != 11) {
 					Helper.showMsg("TC kimlik numarasý 11 haneli olmalýdýr!");
-				}
-				else if(fld_dPass.getText().length() !=6) {
+				} else if (fld_dPass.getText().length() != 6) {
 					Helper.showMsg("Þifre 6 haneli olmalýdýr!");
-				}else {
+				} else {
 					try {
 						int selectID = Integer
 								.parseInt(table_doctor.getValueAt(table_doctor.getSelectedRow(), 0).toString());
-						boolean control = doctor.updateDoctor(selectID,fld_dTc.getText(), fld_dPass.getText(),
-								fld_dName.getText(),fld_telephone.getText(),fld_address.getText());
+						boolean control = doctor.updateDoctor(selectID, fld_dTc.getText(), fld_dPass.getText(),
+								fld_dName.getText(), fld_telephone.getText(), fld_address.getText());
 						if (control) {
 							Helper.showMsg("success");
 							fld_dName.setText(null);
@@ -402,7 +393,7 @@ public class ManagerGUI extends JFrame {
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}				
+					}
 				}
 			}
 		});
@@ -410,25 +401,25 @@ public class ManagerGUI extends JFrame {
 		btn_dUpdate.setBackground(Color.LIGHT_GRAY);
 		btn_dUpdate.setBounds(589, 287, 53, 54);
 		w_doctor.add(btn_dUpdate);
-		
+
 		JLabel lbl_dsearch = new JLabel("Arama");
 		lbl_dsearch.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
 		lbl_dsearch.setBounds(10, 9, 53, 21);
 		w_doctor.add(lbl_dsearch);
-		
+
 		fld_search = new JTextField();
 		fld_search.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		fld_search.setColumns(10);
 		fld_search.setBounds(65, 6, 226, 30);
 		w_doctor.add(fld_search);
-		
-		//Doktor arar
+
+		// Doktor arar
 		JButton btn_search = new JButton("Ara");
 		btn_search.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel clearModel = (DefaultTableModel) table_doctor.getModel();
 				clearModel.setRowCount(0);
-				String name=fld_search.getText();
+				String name = fld_search.getText();
 				try {
 					for (int i = 0; i < bashekim.getDoctorSearch(name).size(); i++) {
 						doctorData[0] = bashekim.getDoctorSearch(name).get(i).getId();
@@ -445,12 +436,12 @@ public class ManagerGUI extends JFrame {
 				}
 			}
 		});
-		
+
 		btn_search.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_search.setBounds(303, 7, 112, 30);
 		w_doctor.add(btn_search);
-		
-		//Aramayý temizler.Tabloyu tüm liste yapar.
+
+		// Aramayý temizler.Tabloyu tüm liste yapar.
 		JButton btn_search_1 = new JButton("Sil");
 		btn_search_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -460,35 +451,35 @@ public class ManagerGUI extends JFrame {
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-				}	
+				}
 			}
 		});
 		btn_search_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_search_1.setBounds(421, 7, 105, 30);
 		w_doctor.add(btn_search_1);
-		
+
 		JLabel lbl_dName_1 = new JLabel("Telefon");
 		lbl_dName_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_1.setBounds(533, 168, 82, 21);
 		w_doctor.add(lbl_dName_1);
-		
+
 		fld_telephone = new JTextField();
 		fld_telephone.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		fld_telephone.setColumns(10);
 		fld_telephone.setBounds(533, 189, 166, 30);
 		w_doctor.add(fld_telephone);
-		
+
 		JLabel lbl_dName_2 = new JLabel("Adres");
 		lbl_dName_2.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_2.setBounds(533, 219, 82, 21);
 		w_doctor.add(lbl_dName_2);
-		
+
 		fld_address = new JTextField();
 		fld_address.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		fld_address.setColumns(10);
 		fld_address.setBounds(533, 237, 166, 46);
 		w_doctor.add(fld_address);
-		
+
 		JPanel w_polyclinic = new JPanel();
 		w_polyclinic.setBackground(Color.WHITE);
 		w_tabpane.addTab("Poliklinik Ýþlemleri", null, w_polyclinic, null);
@@ -499,13 +490,13 @@ public class ManagerGUI extends JFrame {
 		w_polyclinic.add(w_scrollPolyclinic);
 
 		table_polyclinic = new JTable(polyclinicModel);
-		//Tabloda seçilen doktorun bilgilerini text_field'lere yazdýrýr.
-				table_polyclinic.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-					  fld_polyName.setText((String) polyclinicModel.getValueAt(table_polyclinic.getSelectedRow(),1));
-					}
-				});
+		// Tabloda seçilen doktorun bilgilerini text_field'lere yazdýrýr.
+		table_polyclinic.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				fld_polyName.setText((String) polyclinicModel.getValueAt(table_polyclinic.getSelectedRow(), 1));
+			}
+		});
 
 		w_scrollPolyclinic.setViewportView(table_polyclinic);
 
@@ -516,29 +507,28 @@ public class ManagerGUI extends JFrame {
 		table_employee = new JTable();
 		w_scrollEmployee.setViewportView(table_employee);
 
-		//Poliklinik günceller
+		// Poliklinik günceller
 		JButton btn_polyUpdate = new JButton("Düzenle");
 		btn_polyUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (fld_polyName.getText().length() == 0) {
 					Helper.showMsg("complete");
-				}
-				else {
+				} else {
 					int selectID = Integer
 							.parseInt(table_polyclinic.getValueAt(table_polyclinic.getSelectedRow(), 0).toString());
 					try {
-						boolean control = polyclinic.updatePolyclinic(selectID,fld_polyName.getText());
+						boolean control = polyclinic.updatePolyclinic(selectID, fld_polyName.getText());
 						fld_polyName.setText(null);
 						updatePolyclinicModel();
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-					}				
+					}
 				}
-				
+
 			}
 		});
-		
+
 		JLabel lbl_policilinicName = new JLabel("Poliklinik Ad\u0131");
 		lbl_policilinicName.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_policilinicName.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
@@ -581,10 +571,11 @@ public class ManagerGUI extends JFrame {
 		combo_doctor.setMaximumRowCount(100);
 		combo_doctor.setFont(new Font("Yu Gothic UI", Font.PLAIN, 14));
 		combo_doctor.setBounds(276, 244, 156, 30);
-		
-		//Combobox'a doktorlarý listeler
+
+		// Combobox'a doktorlarý listeler
 		for (int i = 0; i < bashekim.getDoctorList().size(); i++) {
-			combo_doctor.addItem(new Item(bashekim.getDoctorList().get(i).getId(),bashekim.getDoctorList().get(i).getName()));	
+			combo_doctor.addItem(
+					new Item(bashekim.getDoctorList().get(i).getId(), bashekim.getDoctorList().get(i).getName()));
 		}
 		combo_doctor.addActionListener(e -> {
 			JComboBox c = (JComboBox) e.getSource();
@@ -595,7 +586,7 @@ public class ManagerGUI extends JFrame {
 
 		JButton btn_addEmployee = new JButton(new ImageIcon(getClass().getResource("/choosedoctor.png")));
 		btn_addEmployee.setBackground(new Color(255, 255, 224));
-		
+
 		// Ýþçi ekleme butonu.Bu methodda iþçi ekler.
 		btn_addEmployee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -638,7 +629,7 @@ public class ManagerGUI extends JFrame {
 		lbl_policName.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
 		lbl_policName.setBounds(276, 169, 106, 21);
 		w_polyclinic.add(lbl_policName);
-		
+
 		JButton btn_polySelect = new JButton("Se\u00E7");
 		btn_polySelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -674,18 +665,17 @@ public class ManagerGUI extends JFrame {
 		lbl_docChoose.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
 		lbl_docChoose.setBounds(276, 219, 106, 21);
 		w_polyclinic.add(lbl_docChoose);
-		
+
 		btn_polyUpdate.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_polyUpdate.setBounds(276, 96, 157, 30);
 		w_polyclinic.add(btn_polyUpdate);
-		
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 204, 153));
 		panel_2.setBounds(271, 11, 168, 156);
 		w_polyclinic.add(panel_2);
 		panel_2.setLayout(null);
-		
+
 		JButton btn_polyUpdate_1 = new JButton("Sil");
 		btn_polyUpdate_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -699,8 +689,8 @@ public class ManagerGUI extends JFrame {
 							if (control) {
 								Helper.showMsg("success");
 								fld_polyName.setText(null);
-								updatePolyclinicModel();							
-								}
+								updatePolyclinicModel();
+							}
 						} else {
 							Helper.showMsg("cancel");
 						}
@@ -712,18 +702,18 @@ public class ManagerGUI extends JFrame {
 					Helper.showMsg("Lütfen geçerli bir doktor seçiniz!");
 				}
 			}
-			
+
 		});
 		btn_polyUpdate_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_polyUpdate_1.setBounds(6, 120, 157, 30);
 		panel_2.add(btn_polyUpdate_1);
-		
+
 		JLabel lbl_pNamee = new JLabel("Poliklinik Listesi");
 		lbl_pNamee.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_pNamee.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
 		lbl_pNamee.setBounds(10, 9, 256, 21);
 		w_polyclinic.add(lbl_pNamee);
-		
+
 		JLabel lbl_dNamee = new JLabel("Poliklinikteki Doktorlar\u0131n Listesi");
 		lbl_dNamee.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_dNamee.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 14));
@@ -759,7 +749,7 @@ public class ManagerGUI extends JFrame {
 								Helper.showMsg("success");
 								patient.updateWStatus(doctorID, seldate);
 								updateAppointModel();
-								//updateWhourModel(doctorID);
+								// updateWhourModel(doctorID);
 							}
 						} else {
 							Helper.showMsg("cancel");
@@ -778,24 +768,24 @@ public class ManagerGUI extends JFrame {
 		btn_delete.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_delete.setBounds(650, 11, 49, 35);
 		panel_appdelete.add(btn_delete);
-		
+
 		JLabel lbl_dsearch_1 = new JLabel("Arama");
 		lbl_dsearch_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
 		lbl_dsearch_1.setBounds(10, 14, 53, 21);
 		panel_appdelete.add(lbl_dsearch_1);
-		
+
 		fld_search_1 = new JTextField();
 		fld_search_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		fld_search_1.setColumns(10);
 		fld_search_1.setBounds(65, 11, 226, 30);
 		panel_appdelete.add(fld_search_1);
-		
+
 		JButton btn_search_2 = new JButton("Ara");
 		btn_search_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DefaultTableModel clearModel = (DefaultTableModel) table.getModel();
 				clearModel.setRowCount(0);
-				String name=fld_search_1.getText();
+				String name = fld_search_1.getText();
 				try {
 					for (int i = 0; i < appoint.getManagerAppointmentSearchList(name).size(); i++) {
 						appointData[0] = appoint.getManagerAppointmentSearchList(name).get(i).getId();
@@ -808,12 +798,12 @@ public class ManagerGUI extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}	
+			}
 		});
 		btn_search_2.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_search_2.setBounds(303, 12, 112, 30);
 		panel_appdelete.add(btn_search_2);
-		
+
 		JButton btn_search_1_1 = new JButton("Sil");
 		btn_search_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -824,73 +814,73 @@ public class ManagerGUI extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}			
+			}
 		});
 		btn_search_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_search_1_1.setBounds(421, 12, 112, 30);
 		panel_appdelete.add(btn_search_1_1);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setToolTipText("");
 		panel_1.setBackground(Color.WHITE);
 		w_tabpane.addTab("Bilgilerim", null, panel_1, null);
 		panel_1.setLayout(null);
-		
+
 		JLabel lbl_dName_3 = new JLabel("Ad Soyad");
 		lbl_dName_3.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3.setBounds(397, 40, 82, 21);
 		panel_1.add(lbl_dName_3);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField.setColumns(10);
 		textField.setBounds(397, 61, 166, 30);
 		panel_1.add(textField);
-		
+
 		JLabel lbl_dTC_1 = new JLabel("TC No");
 		lbl_dTC_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dTC_1.setBounds(397, 96, 82, 21);
 		panel_1.add(lbl_dTC_1);
-		
+
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_1.setColumns(10);
 		textField_1.setBounds(397, 113, 166, 30);
 		panel_1.add(textField_1);
-		
+
 		JLabel lbl_dPass_1 = new JLabel("\u015Eifre");
 		lbl_dPass_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dPass_1.setBounds(397, 148, 82, 21);
 		panel_1.add(lbl_dPass_1);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_2.setColumns(10);
 		textField_2.setBounds(397, 166, 166, 30);
 		panel_1.add(textField_2);
-		
+
 		JLabel lbl_dName_1_1 = new JLabel("Telefon");
 		lbl_dName_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_1_1.setBounds(397, 199, 82, 21);
 		panel_1.add(lbl_dName_1_1);
-		
+
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_3.setColumns(10);
 		textField_3.setBounds(397, 220, 166, 30);
 		panel_1.add(textField_3);
-		
+
 		JLabel lbl_dName_2_1 = new JLabel("Adres");
 		lbl_dName_2_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_2_1.setBounds(397, 250, 82, 21);
 		panel_1.add(lbl_dName_2_1);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
 		textField_4.setColumns(10);
 		textField_4.setBounds(397, 268, 166, 46);
 		panel_1.add(textField_4);
-		
+
 		JButton btn_dUpdate_1 = new JButton(new ImageIcon(getClass().getResource("/arrangement.png")));
 		btn_dUpdate_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -899,31 +889,29 @@ public class ManagerGUI extends JFrame {
 				textField_2.setText(bashekim.getPassword());
 				textField_3.setText(bashekim.getTelephone());
 				textField_4.setText(bashekim.getAddress());
-				
+
 			}
 		});
 		btn_dUpdate_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 15));
 		btn_dUpdate_1.setBackground(Color.LIGHT_GRAY);
 		btn_dUpdate_1.setBounds(311, 61, 58, 46);
 		panel_1.add(btn_dUpdate_1);
-		
+
 		JButton btn_dDelete_1 = new JButton(new ImageIcon(getClass().getResource("/save.png")));
 		btn_dDelete_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().length() == 0 || textField_1.getText().length() == 0
 						|| textField_2.getText().length() == 0) {
 					Helper.showMsg("complete");
-				}
-				else if(textField_1.getText().length() !=11 ){
+				} else if (textField_1.getText().length() != 11) {
 					Helper.showMsg("TC kimlik numarasý 11 haneli olmalýdýr!");
-				}
-				else if(textField_2.getText().length() !=6) {
+				} else if (textField_2.getText().length() != 6) {
 					Helper.showMsg("Þifre 6 haneli olmalýdýr!");
-				}else {
+				} else {
 					try {
 						int selectID = bashekim.getId();
-						boolean control = doctor.updateDoctor(selectID,textField_1.getText(), textField_2.getText(),
-								textField.getText(),textField_3.getText(),textField_4.getText());
+						boolean control = doctor.updateDoctor(selectID, textField_1.getText(), textField_2.getText(),
+								textField.getText(), textField_3.getText(), textField_4.getText());
 						if (control) {
 							Helper.showMsg("success");
 							textField.setText(null);
@@ -931,12 +919,11 @@ public class ManagerGUI extends JFrame {
 							textField_2.setText(null);
 							textField_3.setText(null);
 							textField_4.setText(null);
-							
-							
+
 						}
 					} catch (SQLException e1) {
 						e1.printStackTrace();
-					}				
+					}
 				}
 			}
 		});
@@ -944,62 +931,62 @@ public class ManagerGUI extends JFrame {
 		btn_dDelete_1.setBackground(Color.LIGHT_GRAY);
 		btn_dDelete_1.setBounds(593, 281, 58, 46);
 		panel_1.add(btn_dDelete_1);
-		
+
 		JLabel lbl_dName_3_1 = new JLabel("Bilgilerim:");
 		lbl_dName_3_1.setFont(new Font("Impact", Font.PLAIN, 17));
 		lbl_dName_3_1.setBounds(47, 9, 82, 21);
 		panel_1.add(lbl_dName_3_1);
-		
-		JLabel lblNewLabel = new JLabel("Ad Soyad: "+bashekim.getName());
+
+		JLabel lblNewLabel = new JLabel("Ad Soyad: " + bashekim.getName());
 		lblNewLabel.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel.setBackground(new Color(204, 204, 255));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel.setBounds(47, 32, 230, 35);
 		panel_1.add(lblNewLabel);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 204, 255));
 		panel.setBounds(379, 37, 199, 290);
 		panel_1.add(panel);
-		
+
 		JLabel lbl_dName_3_2 = new JLabel("D\u00FCzenle");
 		lbl_dName_3_2.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3_2.setBounds(311, 40, 58, 21);
 		panel_1.add(lbl_dName_3_2);
-		
+
 		JLabel lbl_dName_3_2_1 = new JLabel("Kaydet");
 		lbl_dName_3_2_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 13));
 		lbl_dName_3_2_1.setBounds(593, 260, 70, 21);
 		panel_1.add(lbl_dName_3_2_1);
-		
-		JLabel lblNewLabel_1 = new JLabel("Tc: "+bashekim.getTcno());
+
+		JLabel lblNewLabel_1 = new JLabel("Tc: " + bashekim.getTcno());
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_1.setBackground(new Color(204, 204, 255));
 		lblNewLabel_1.setBounds(47, 73, 254, 35);
 		panel_1.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Þifre: "+bashekim.getPassword());
+
+		JLabel lblNewLabel_2 = new JLabel("Þifre: " + bashekim.getPassword());
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_2.setBackground(new Color(204, 204, 255));
 		lblNewLabel_2.setBounds(47, 113, 254, 35);
 		panel_1.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Telefon: "+bashekim.getTelephone());
+
+		JLabel lblNewLabel_3 = new JLabel("Telefon: " + bashekim.getTelephone());
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_3.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_3.setBackground(new Color(204, 204, 255));
 		lblNewLabel_3.setBounds(47, 152, 254, 35);
 		panel_1.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("Adres: "+bashekim.getAddress());
+
+		JLabel lblNewLabel_4 = new JLabel("Adres: " + bashekim.getAddress());
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_4.setFont(new Font("Yu Gothic UI", Font.PLAIN, 15));
 		lblNewLabel_4.setBackground(new Color(204, 204, 255));
 		lblNewLabel_4.setBounds(47, 188, 254, 35);
 		panel_1.add(lblNewLabel_4);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setToolTipText("");
 		panel_3.setBackground(new Color(255, 255, 153));
@@ -1016,9 +1003,8 @@ public class ManagerGUI extends JFrame {
 		btn_exit_1.setBounds(624, 11, 45, 33);
 		w_pane.add(btn_exit_1);
 	}
-	
 
-	// Doktor tablosunu günceller. Son eklenene ya da silinene göre düzenler
+	// Doktor tablosunu günceller. Son eklenene ya da silinene göre düzenler.
 	public void updateDoctorModel() throws SQLException {
 		DefaultTableModel clearModel = (DefaultTableModel) table_doctor.getModel();
 		clearModel.setRowCount(0);

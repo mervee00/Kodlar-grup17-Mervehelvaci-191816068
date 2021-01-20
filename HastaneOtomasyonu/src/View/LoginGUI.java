@@ -43,6 +43,9 @@ public class LoginGUI extends JFrame {
 	private JPasswordField fld_doktorPass;
 	private DBConnection conn = new DBConnection();
 	private JPasswordField fld_patientPass;
+	private JPasswordField fld_mPass;
+	private JTextField fld_mTc;
+	static String user=null;
 
 	/**
 	 * Launch the application.
@@ -116,7 +119,9 @@ public class LoginGUI extends JFrame {
 		JButton btn_register = new JButton("Kay\u0131t Ol");
 		btn_register.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegisterGUI register = new RegisterGUI();
+				user="patient";
+				RegisterGUI register = new RegisterGUI(user);
+				
 				register.setVisible(true);
 				dispose();
 			}
@@ -262,7 +267,7 @@ public class LoginGUI extends JFrame {
 			}
 		});
 		btn_doktorLogin.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
-		btn_doktorLogin.setBounds(166, 135, 381, 47);
+		btn_doktorLogin.setBounds(354, 135, 193, 47);
 		w_doktorLogin.add(btn_doktorLogin);
 
 		fld_doktorPass = new JPasswordField();
@@ -273,6 +278,107 @@ public class LoginGUI extends JFrame {
 		JLabel lbl_doctoricon = new JLabel(new ImageIcon(getClass().getResource("/doctorlogin.png")));
 		lbl_doctoricon.setBounds(23, 33, 118, 140);
 		w_doktorLogin.add(lbl_doctoricon);
+		
+		JButton btn_register_1 = new JButton("Kay\u0131t Ol");
+		btn_register_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				user="doctor";
+					RegisterGUI register = new RegisterGUI(user);
+					register.setVisible(true);
+					dispose();
+			}
+		});
+		btn_register_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
+		btn_register_1.setBounds(158, 138, 186, 40);
+		w_doktorLogin.add(btn_register_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		w_tabpane.addTab("Yönetici", null, panel, null);
+		panel.setLayout(null);
+		
+		JLabel lbl_doctoricon_1 = new JLabel((Icon) null);
+		lbl_doctoricon_1.setBounds(26, 27, 118, 140);
+		panel.add(lbl_doctoricon_1);
+		
+		JLabel lbl_dTC_1 = new JLabel("TC Numaran\u0131z:");
+		lbl_dTC_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 20));
+		lbl_dTC_1.setBounds(169, 27, 152, 24);
+		panel.add(lbl_dTC_1);
+		
+		JLabel lbl_dPass_1 = new JLabel("\u015Eifre:");
+		lbl_dPass_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 20));
+		lbl_dPass_1.setBounds(169, 84, 152, 24);
+		panel.add(lbl_dPass_1);
+		
+		JButton btn_register_1_1 = new JButton("Kay\u0131t Ol");
+		btn_register_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				user="manager";
+				RegisterGUI register = new RegisterGUI(user);
+				register.setVisible(true);
+				dispose();
+			}
+		});
+		btn_register_1_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
+		btn_register_1_1.setBounds(161, 132, 186, 40);
+		panel.add(btn_register_1_1);
+		
+		JButton btn_doktorLogin_1 = new JButton("Giri\u015F");
+		btn_doktorLogin_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (fld_mTc.getText().length() == 0 || fld_mPass.getText().length() == 0) {
+					Helper.showMsg("complete");
+				} else {
+					boolean xControl = true;
+					try {
+						Connection con = conn.connDb();
+						Statement st = con.createStatement();
+						ResultSet rs = st.executeQuery("SELECT * FROM user");// sql deki tum userlarý cagýrýr
+						while (rs.next()) { // tek tek kontrol eder
+							if (fld_mTc.getText().equals(rs.getString("tcno"))
+									&& fld_mPass.getText().equals(rs.getString("password"))) {
+								if (rs.getString("type").equals("manager")) {
+									Manager bhekim = new Manager();
+									bhekim.setId(rs.getInt("id"));
+									bhekim.setPassword(rs.getString("password"));
+									bhekim.setTcno(rs.getString("tcno"));
+									bhekim.setName(rs.getString("name"));
+									bhekim.setTelephone(rs.getString("telephone"));
+									bhekim.setAddress(rs.getString("address"));
+									bhekim.setType(rs.getString("type"));
+									ManagerGUI bGUI = new ManagerGUI(bhekim);
+									bGUI.setVisible(true);
+									dispose();
+									xControl=false;
+								}
+
+							}
+						}
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+					if (xControl) {
+						Helper.showMsg("Böyle bir yönetici bulunamadý! Bilgilerinizi kontrol edin!");
+					}
+				}
+				
+			}
+		});
+		btn_doktorLogin_1.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
+		btn_doktorLogin_1.setBounds(357, 129, 193, 47);
+		panel.add(btn_doktorLogin_1);
+		
+		fld_mPass = new JPasswordField();
+		fld_mPass.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		fld_mPass.setBounds(347, 84, 207, 34);
+		panel.add(fld_mPass);
+		
+		fld_mTc = new JTextField();
+		fld_mTc.setFont(new Font("Yu Gothic UI", Font.PLAIN, 18));
+		fld_mTc.setColumns(10);
+		fld_mTc.setBounds(347, 24, 207, 34);
+		panel.add(fld_mTc);
 		
 		JButton btnNewButton = new JButton(new ImageIcon(getClass().getResource("/help.png")));
 		btnNewButton.setBackground(Color.WHITE);

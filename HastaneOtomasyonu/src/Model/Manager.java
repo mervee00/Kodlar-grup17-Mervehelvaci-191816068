@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import Helper.Helper;
 
-public class Manager extends User { // kalýtým kullandýk User'dan
+public class Manager extends User { // User Class'ýndan kalýtým yaptýk
 	Connection con = conn.connDb();
 	Statement st = null;
 	ResultSet rs = null;

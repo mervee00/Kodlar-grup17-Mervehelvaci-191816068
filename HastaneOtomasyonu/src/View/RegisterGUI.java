@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import Helper.Helper;
 import Model.Patient;
+import Model.User;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.Icon;
+import javax.swing.SwingConstants;
 
 public class RegisterGUI extends JFrame {
 
@@ -30,10 +32,10 @@ public class RegisterGUI extends JFrame {
 	private JTextField fld_hName;
 	private JTextField fld_hTC;
 	private JPasswordField fld_hPass;
-	private Patient patient = new Patient();
+	private static User user = new User();
 	private JTextField fld_telephone;
 	private JTextField fld_address;
-
+    static String type=null;
 	/**
 	 * Launch the application.
 	 */
@@ -41,7 +43,8 @@ public class RegisterGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegisterGUI frame = new RegisterGUI();
+					
+					RegisterGUI frame = new RegisterGUI(type);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +56,7 @@ public class RegisterGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegisterGUI() {
+	public RegisterGUI(String type) {
 		setResizable(false);
 		setTitle("Hastane Yönetim Sistemi");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +96,7 @@ public class RegisterGUI extends JFrame {
 		JButton btn_register = new JButton(new ImageIcon(getClass().getResource("/register.png")));
 		btn_register.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if (fld_hTC.getText().length() ==0 || fld_hPass.getText().length() ==0
 						|| fld_hName.getText().length() == 0) {
 					Helper.showMsg("complete");
@@ -104,8 +108,8 @@ public class RegisterGUI extends JFrame {
 					Helper.showMsg("Þifre 6 haneli olmalýdýr!");
 				}else {
 					try {
-						boolean control = patient.addRegister(fld_hTC.getText(), fld_hPass.getText(),
-								fld_hName.getText(),fld_telephone.getText(),fld_address.getText());
+						boolean control =user.addRegister(fld_hTC.getText(), fld_hPass.getText(),
+								fld_hName.getText(),fld_telephone.getText(),fld_address.getText(),type);
 						if (control) {
 							Helper.showMsg("success");
 							LoginGUI login = new LoginGUI();
@@ -135,7 +139,8 @@ public class RegisterGUI extends JFrame {
 	}});btn_back.setFont(new Font("Yu Gothic UI Semibold",Font.PLAIN,15));btn_back.setBackground(Color.LIGHT_GRAY);btn_back.setBounds(33,308,80,41);contentPane.add(btn_back);
 
 	JLabel lbl_hName_1 = new JLabel(
-			"Hasta Kay\u0131t");lbl_hName_1.setFont(new Font("Yu Gothic UI Semibold",Font.BOLD,16));lbl_hName_1.setBounds(82,11,98,21);contentPane.add(lbl_hName_1);
+			"Kay\u0131t");
+	lbl_hName_1.setHorizontalAlignment(SwingConstants.CENTER);lbl_hName_1.setFont(new Font("Yu Gothic UI Semibold",Font.BOLD,16));lbl_hName_1.setBounds(33,11,175,21);contentPane.add(lbl_hName_1);
 
 	fld_hPass=new JPasswordField();fld_hPass.setBounds(33,163,175,30);contentPane.add(fld_hPass);
 JLabel lbl_hTC_1 = new JLabel("Telefon Numaras\u0131");

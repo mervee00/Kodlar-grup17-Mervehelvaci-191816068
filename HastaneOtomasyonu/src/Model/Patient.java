@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 import Helper.Helper;
 
-public class Patient extends User {
+public class Patient extends User { // User Class'ýndan kalýtým yaptýk
 
 	Connection con = conn.connDb();
 	Statement st = null;
@@ -25,7 +25,7 @@ public class Patient extends User {
 
 	
 	//hasta kayýt ekler
-	public boolean addRegister(String tcno, String password, String name,String telephone, String address) throws SQLException {
+	public boolean addRegister(String tcno, String password, String name,String telephone, String address,String type) throws SQLException {
 		String query = "INSERT INTO user (tcno,password,name,telephone,address,type) VALUES (?,?,?,?,?,?)";
 		boolean xControl = false;
 		int number = 0;
@@ -44,7 +44,7 @@ public class Patient extends User {
 				preparedStatement.setString(3, name);
 				preparedStatement.setString(4, telephone);
 				preparedStatement.setString(5, address);
-				preparedStatement.setString(6, "patient");
+				preparedStatement.setString(6, type);
 				preparedStatement.executeUpdate();
 				xControl = true;
 			}

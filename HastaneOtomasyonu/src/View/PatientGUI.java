@@ -619,6 +619,7 @@ public class PatientGUI extends JFrame {
 		}
 	}
 
+	//Polymorphism:Ürettiðim appoint nesnesini bu methodda farklý degerler atayarak randevularý hasta ýd'sine göre listeletebildik.
 	public void updateAppointModel(int patientID) throws SQLException {
 		DefaultTableModel clearModel = (DefaultTableModel) table.getModel();
 		clearModel.setRowCount(0);
