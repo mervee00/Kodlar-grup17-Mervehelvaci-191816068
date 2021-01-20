@@ -297,7 +297,7 @@ public class LoginGUI extends JFrame {
 		w_tabpane.addTab("Yönetici", null, panel, null);
 		panel.setLayout(null);
 		
-		JLabel lbl_doctoricon_1 = new JLabel((Icon) null);
+		JLabel lbl_doctoricon_1 = new JLabel(new ImageIcon(getClass().getResource("/managerlogin.png").getFile()));
 		lbl_doctoricon_1.setBounds(26, 27, 118, 140);
 		panel.add(lbl_doctoricon_1);
 		
