@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="Cp1254" standalone="no"?>
+<jardesc>
+    <jar path="HastaneOtomasyonu/jarx/HastaneOtomasyonu.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/HastaneOtomasyonu/JarBuild.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="false" mainClassHandleIdentifier="=HastaneOtomasyonu/src&lt;View{LoginGUI.java[LoginGUI" manifestLocation="/HastaneOtomasyonu/manifest" manifestVersion="1.0" reuseManifest="true" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/HastaneOtomasyonu/HastaneOtomasyonu.jar"/>
+        <file path="/HastaneOtomasyonu/.classpath"/>
+        <javaElement handleIdentifier="=HastaneOtomasyonu/img"/>
+        <javaElement handleIdentifier="=HastaneOtomasyonu/src"/>
+        <file path="/HastaneOtomasyonu/.project"/>
+        <folder path="/HastaneOtomasyonu/java.masaustu"/>
+    </selectedElements>
+</jardesc>
